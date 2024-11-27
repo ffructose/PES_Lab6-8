@@ -16,6 +16,7 @@ export class AlgorithmComponent implements OnChanges {
       this.log = []; // Очищуємо попередні результати
       this.stepCounter = 1; // Скидаємо лічильник кроків
       this.startAlgorithm(); // Запускаємо алгоритм
+      this.facts[7].value = 1;
     }
   }
 
@@ -52,7 +53,7 @@ export class AlgorithmComponent implements OnChanges {
             activeRuleFound = true;
             break; // Повертаємось до початку правил
           } else {
-            this.addLog(`-> Ядро продукції ${rule.id} не буде активоване.`);
+            this.addLog(`-> Ядро продукції ${rule.id} не буде активоване.`, false);
           }
         } else {
           this.addLog('Перехід до наступної продукції.');
@@ -101,12 +102,11 @@ export class AlgorithmComponent implements OnChanges {
 
   applyAction(action: string) {
     let changed = false;
-
+  
     if (action.includes('ВідкритиВентильГарячоїВодиНа')) {
       const prevState = this.facts[2].value; // f3 (вентиль гарячої води повністю відкритий)
       this.facts[2].value = true; // Змінюємо стан факту f3
       this.facts[0].value = true; // f1 також стає true
-      this.facts[7].value = Math.max(2, this.facts[7].value as number); // Оновлюємо крок для гарячої води
       this.addLog(
         `В цей момент змінюється факт f3: ${prevState ? 'true' : 'false'} → ${this.facts[2].value ? 'true' : 'false'}.`,
         false
@@ -115,7 +115,6 @@ export class AlgorithmComponent implements OnChanges {
     } else if (action.includes('ЗакритиВентильГарячоїВоди')) {
       const prevState = this.facts[2].value; // f3
       this.facts[2].value = false; // Змінюємо стан факту f3
-      this.facts[7].value = Math.max(1, this.facts[7].value as number); // Оновлюємо крок для гарячої води
       this.addLog(
         `В цей момент змінюється факт f3: ${prevState ? 'true' : 'false'} → ${this.facts[2].value ? 'true' : 'false'}.`,
         false
@@ -125,7 +124,6 @@ export class AlgorithmComponent implements OnChanges {
       const prevState = this.facts[3].value; // f4 (вентиль холодної води повністю відкритий)
       this.facts[3].value = true; // Змінюємо стан факту f4
       this.facts[1].value = true; // f2 також стає true
-      this.facts[7].value = Math.max(1, this.facts[7].value as number); // Оновлюємо крок для холодної води
       this.addLog(
         `В цей момент змінюється факт f4: ${prevState ? 'true' : 'false'} → ${this.facts[3].value ? 'true' : 'false'}.`,
         false
@@ -134,19 +132,19 @@ export class AlgorithmComponent implements OnChanges {
     } else if (action.includes('ЗакритиВентильХолодноїВоди')) {
       const prevState = this.facts[3].value; // f4
       this.facts[3].value = false; // Змінюємо стан факту f4
-      this.facts[7].value = Math.max(1, this.facts[7].value as number); // Оновлюємо крок для холодної води
       this.addLog(
         `В цей момент змінюється факт f4: ${prevState ? 'true' : 'false'} → ${this.facts[3].value ? 'true' : 'false'}.`,
         false
       );
       changed = true;
     }
-
+  
     // Якщо стан вентилів змінився, перевіряємо температуру води
     if (changed) {
       this.updateWaterTemperature();
     }
   }
+  
 
   updateWaterTemperature() {
     const hotSteps = Number(0);
