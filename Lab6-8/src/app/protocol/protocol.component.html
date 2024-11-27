@@ -1,1 +1,8 @@
-<p>protocol works!</p>
+<div class="container">
+    <h2>Протокол дій</h2>
+    <button (click)="clearProtocol()">Очистити протокол</button>
+    <ul>
+      <li *ngFor="let action of protocol">{{ action }}</li>
+    </ul>
+  </div>
+  
