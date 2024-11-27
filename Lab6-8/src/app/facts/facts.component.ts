@@ -23,6 +23,7 @@ export class FactsComponent implements OnInit {
     '<3, f1∧f2∧f5, f3∧¬f7, ЗакритиВентильГарячоїВоди()>',
     '<4, f1∧f2∧f6, f4∧¬f7, ЗакритиВентильХолодноїВоди()>'
   ];
+  runAlgorithm: boolean = false;
 
   ngOnInit() {
     const savedFacts = localStorage.getItem('myAppFacts');
@@ -33,14 +34,8 @@ export class FactsComponent implements OnInit {
 
   toggleFact(index: number) {
     if (typeof this.facts[index].value === 'boolean') {
-      const prevValue = this.facts[index].value;
-      this.facts[index].value = !prevValue;
+      this.facts[index].value = !this.facts[index].value;
       this.saveFactsToLocalStorage();
-      this.logActionToProtocol(
-        `Факт "${this.facts[index].name}" змінено: ${prevValue ? 'true' : 'false'} → ${
-          this.facts[index].value ? 'true' : 'false'
-        }`
-      );
     }
   }
 
@@ -48,9 +43,8 @@ export class FactsComponent implements OnInit {
     localStorage.setItem('myAppFacts', JSON.stringify(this.facts));
   }
 
-  logActionToProtocol(action: string) {
-    const protocol = JSON.parse(localStorage.getItem('myAppProtocol') || '[]');
-    protocol.push(action);
-    localStorage.setItem('myAppProtocol', JSON.stringify(protocol));
+  startAlgorithm() {
+    this.runAlgorithm = true;
+    setTimeout(() => (this.runAlgorithm = false), 0); // Зупиняємо сигнал
   }
 }

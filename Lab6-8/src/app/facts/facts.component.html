@@ -1,45 +1,40 @@
 <div class="main-container">
-    <!-- Ліва колонка -->
     <div class="left-column">
-      <div class="facts-container">
-        <h3>Факти</h3>
-        <ul>
-          <li *ngFor="let fact of facts" 
-              [style.background-color]="fact.value ? '#8fee94' : '#ff9c84'" 
-              class="fact-list-item">
-            {{ fact.name }} – {{ fact.description }}
-          </li>
-        </ul>
-      </div>
-  
-      <div class="facts-state">
-        <h3>Стан фактів</h3>
-        <div class="facts-row">
-          <span *ngFor="let fact of facts; let i = index" 
-                (click)="toggleFact(i)" 
-                [style.background-color]="fact.value ? '#8fee94' : '#ff9c84'" 
-                class="fact-state">
-            {{ fact.name }}={{ fact.value }}
-          </span>
+        <div class="facts-container">
+            <h3>Факти</h3>
+            <ul>
+                <li *ngFor="let fact of facts" [style.background-color]="fact.value ? '#8fee94' : '#ff9c84'"
+                    class="fact-list-item">
+                    {{ fact.name }} – {{ fact.description }}
+                </li>
+            </ul>
         </div>
-      </div>
-  
-      <div class="rules-container">
-        <h3>Правила</h3>
-        <ul>
-          <li *ngFor="let rule of rules" class="rule-box">
-            {{ rule }}
-          </li>
-        </ul>
-      </div>
+
+        <div class="facts-state">
+            <h3>Стан фактів</h3>
+            <div class="facts-row">
+                <span *ngFor="let fact of facts; let i = index" (click)="toggleFact(i)"
+                    [style.background-color]="fact.value ? '#8fee94' : '#ff9c84'" class="fact-state">
+                    {{ fact.name }}={{ fact.value }}
+                </span>
+            </div>
+        </div>
+
+        <div class="rules-container">
+            <h3>Правила</h3>
+            <ul>
+                <li *ngFor="let rule of rules" class="rule-box">
+                    {{ rule }}
+                </li>
+            </ul>
+        </div>
+
+
     </div>
-  
-    <!-- Права колонка -->
+
     <div class="right-column">
-      <div class="algorithm-container">
-        <h3>Алгоритм вирішення</h3>
-        <p>Тут буде виводитись алгоритм.</p>
-      </div>
+        <!-- Кнопка для запуску алгоритму -->
+        <button (click)="startAlgorithm()">Запустити алгоритм</button>
+        <app-algorithm [facts]="facts" [runAlgorithm]="runAlgorithm"></app-algorithm>
     </div>
-  </div>
-  
+</div>
