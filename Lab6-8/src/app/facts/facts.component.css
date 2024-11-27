@@ -80,3 +80,47 @@ h3 {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-size: 1em;
 }
+
+/* Основний контейнер для колонок */
+.main-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 20px; /* Відступ між колонками */
+    margin: 20px;
+}
+
+/* Ліва колонка (факти, стани фактів, правила) */
+.left-column {
+    flex: 2; /* Займає більшу частину ширини */
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Відступи між контейнерами */
+}
+
+/* Права колонка (алгоритм) */
+.right-column {
+    flex: 1; /* Займає меншу частину ширини */
+}
+
+.algorithm-container {
+    margin: 20px;
+    padding: 15px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.algorithm-container h3 {
+    font-family: 'Arial', sans-serif;
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.algorithm-container p {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 18px;
+    color: #555;
+}

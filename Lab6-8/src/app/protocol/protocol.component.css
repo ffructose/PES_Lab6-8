@@ -20,6 +20,7 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 20px;
   }
   
   button:hover {
@@ -37,5 +38,6 @@
     padding: 10px;
     border-radius: 5px;
     font-family: 'Georgia', serif;
+    font-size: 20px;
   }
   

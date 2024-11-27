@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-facts',
   templateUrl: './facts.component.html',
   styleUrls: ['./facts.component.css']
 })
-export class FactsComponent {
+export class FactsComponent implements OnInit {
   facts = [
     { name: 'f1', description: 'вентиль гарячої води відкритий', value: true },
     { name: 'f2', description: 'вентиль холодної води відкритий', value: true },
@@ -24,9 +24,33 @@ export class FactsComponent {
     '<4, f1∧f2∧f6, f4∧¬f7, ЗакритиВентильХолодноїВоди()>'
   ];
 
+  ngOnInit() {
+    const savedFacts = localStorage.getItem('myAppFacts');
+    if (savedFacts) {
+      this.facts = JSON.parse(savedFacts);
+    }
+  }
+
   toggleFact(index: number) {
     if (typeof this.facts[index].value === 'boolean') {
-      this.facts[index].value = !this.facts[index].value;
+      const prevValue = this.facts[index].value;
+      this.facts[index].value = !prevValue;
+      this.saveFactsToLocalStorage();
+      this.logActionToProtocol(
+        `Факт "${this.facts[index].name}" змінено: ${prevValue ? 'true' : 'false'} → ${
+          this.facts[index].value ? 'true' : 'false'
+        }`
+      );
     }
+  }
+
+  saveFactsToLocalStorage() {
+    localStorage.setItem('myAppFacts', JSON.stringify(this.facts));
+  }
+
+  logActionToProtocol(action: string) {
+    const protocol = JSON.parse(localStorage.getItem('myAppProtocol') || '[]');
+    protocol.push(action);
+    localStorage.setItem('myAppProtocol', JSON.stringify(protocol));
   }
 }

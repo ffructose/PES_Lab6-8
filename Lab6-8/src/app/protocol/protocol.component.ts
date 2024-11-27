@@ -9,11 +9,12 @@ export class ProtocolComponent implements OnInit {
   protocol: string[] = [];
 
   ngOnInit() {
-    this.protocol = JSON.parse(localStorage.getItem('protocol') || '[]');
+    // Використовуємо унікальний ключ для цього проєкту
+    this.protocol = JSON.parse(localStorage.getItem('myAppProtocol') || '[]');
   }
 
   clearProtocol() {
     this.protocol = [];
-    localStorage.removeItem('protocol');
+    localStorage.removeItem('myAppProtocol'); // Видаляємо дані тільки цього проєкту
   }
 }
