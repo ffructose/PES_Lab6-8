@@ -93,7 +93,7 @@ h3 {
 
 /* Ліва колонка (факти, стани фактів, правила) */
 .left-column {
-    flex: 5;
+    flex: 2;
     /* Займає більшу частину ширини */
     display: flex;
     flex-direction: column;

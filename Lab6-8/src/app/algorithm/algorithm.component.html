@@ -1,7 +1,15 @@
-<div class="algorithm-container">
+<div class="main-container">
+  <div class="algorithm-container">
+    <h3>Алгоритм вирішення</h3>
+    <div *ngFor="let entry of explanationSteps" class="log-entry">
+      {{ entry }}
+    </div>
+  </div>
+
+  <div class="algorithm-container">
     <h3>Алгоритм вирішення</h3>
     <div *ngFor="let entry of log" class="log-entry">
       {{ entry }}
     </div>
   </div>
-  
+</div>
